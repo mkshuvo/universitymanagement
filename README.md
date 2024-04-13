@@ -3,9 +3,7 @@
 This is an user login and registration course advising app using Node.js, Express, Passport, Mongoose, EJS and some other packages.
 
 
-```
-
-```sh
+```bash
 $ npm start
 # Or run with Nodemon
 $ npm run dev
