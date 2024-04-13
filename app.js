@@ -15,11 +15,10 @@ require('./config/passport')(passport);
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
@@ -47,7 +46,7 @@ app.use(passport.session());
 app.use(flash());
 
 // Global variables
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -56,10 +55,10 @@ app.use(function(req, res, next) {
 
 // Routes
 app.use('/', require('./routes/index.js'));
-app.use('/',require('./routes/Advising'));
+app.use('/', require('./routes/Advising'));
 app.use('/users', require('./routes/users.js'));
 app.use('/courses', require('./routes/Course'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

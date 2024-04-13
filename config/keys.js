@@ -1,5 +1,5 @@
-url2 = "mongodb+srv://mkshuvo:iamshuvo123@cluster0-zht09.mongodb.net/advising?retryWrites=true&w=majority";
+url = process.env.MONGO_URL;
 
 module.exports = {
-  mongoURI: url2,
+  mongoURI: url,
 };

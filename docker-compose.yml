@@ -1,0 +1,35 @@
+version: '3'
+services:
+  university-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-nodejs-app
+    container_name: university-container
+    ports:
+      - "5002:5002"
+    networks:
+      - universitynetwork
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/universitymanagement
+    volumes:
+      - ./:/app
+
+  mongodb:
+    image: mongo
+    container_name: mongodb-container
+    ports:
+      - "27017:27017"
+    networks:
+      - universitynetwork
+    environment:
+      - MONGO_INITDB_DATABASE=universitymanagement
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
+
+networks:
+  universitynetwork:
+    external: true
